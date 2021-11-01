@@ -1,13 +1,6 @@
-const Koa = require('koa')
+const {APP_PORT} = require('./config/config.default')
+const app = require('./router/index')
 
-const app = new Koa()
-
-app.use((ctx)=>{
-    ctx.body = {
-        code:20011
-    }
-})
-
-app.listen(3001,()=>{
-    console.log('service is running at http://localhost:3001')
+app.listen(APP_PORT,()=>{
+    console.log(`service is running at http://localhost:${APP_PORT}`)
 })
