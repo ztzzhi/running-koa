@@ -1,5 +1,6 @@
 const Koa = require('koa')
 
+const errorHandle = require('../config/error.config')
 const KoaBody = require('koa-body')
 
 const userRouter = require('./user.router')
@@ -11,5 +12,7 @@ app.use(KoaBody({
 }))
 
 app.use(userRouter.routes())
+
+app.on('error',errorHandle)
 
 module.exports = app
