@@ -6,6 +6,8 @@ let config = {
     MYSQL_PWD : 'root',
     MYSQL_DB : 'runningman',
     MYSQL_TYPE : 'mysql',
+    SALT:10 ,//密码加密 加盐 10 次,
+    JWTSECRET:'ztz'
 }
 
 module.exports = config

@@ -10,3 +10,4 @@ npm i --save koa
 排除node_modules文件
 
 
+bcryptjs 密码加密

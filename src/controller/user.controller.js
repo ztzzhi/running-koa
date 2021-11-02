@@ -1,6 +1,7 @@
 const { createUser, getUserInfo } = require("../service/user.service");
 
 class UserController {
+  // 用户注册
   async register(ctx, next) {
     const { user_name, password } = ctx.request.body;
     if (!user_name || !password) {
@@ -44,35 +45,13 @@ class UserController {
       }
     }
   }
+  // 用户登录
   async login(ctx, next) {
-    const { user_name, password } = ctx.request.query;
-    try {
-      const res = await getUserInfo({ user_name, password });
-      if (res) {
-        ctx.body = {
-          code: 200,
-          msg: "欢迎登录",
-          result: {
-            user_name: res.user_name,
-          },
-        };
-        return;
-      }
-      ctx.app.emit(
-        "error",
-        {
-          code: 400,
-          msg: "用户登录失败,请检查用户名和密码",
-          result: "",
-        },
-        ctx
-      );
-    } catch (error) {
-      ctx.app.emit("error", {
-        code: 500,
-        msg: "登录异常",
-        result: "",
-      });
+    const { user_name } = ctx.request
+    ctx.body = {
+      code:200,
+      msg:"用户登录成功",
+      result: user_name
     }
   }
 }
