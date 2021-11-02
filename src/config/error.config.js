@@ -1,4 +1,4 @@
-// 错误集中处理
+// 错误集中处 理
 module.exports = (err,ctx)=>{
   let status = 400
   switch (err.code) {
