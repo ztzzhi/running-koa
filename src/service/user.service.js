@@ -1,7 +1,7 @@
 const User = require("../model/user.model");
 
 class UserService {
-  async createUser(user_name, password) {
+  async createUser (user_name, password) {
     const result = await User.create({
       user_name,
       password,
@@ -9,7 +9,7 @@ class UserService {
     return result;
   }
 
-  async getUserInfo({ id, user_name, password }) {
+  async getUserInfo ({ id, user_name, password }) {
     const opt = {};
     id && Object.assign(opt, { id });
     user_name && Object.assign(opt, { user_name });
@@ -18,7 +18,25 @@ class UserService {
       attributes: ["id", "user_name", "password"],
       where: opt,
     });
+    console.log(result);
     return result ? result.dataValues : null;
+  }
+
+  async updateById (obj) {
+    const { user_name, id, password } = obj
+    const opt = { id }
+    const newOpt = {}
+    user_name && Object.assign(newOpt, { user_name })
+    id && Object.assign(newOpt, { id })
+    password && Object.assign(newOpt, { password })
+
+    try {
+      const res = await User.update(newOpt,{where:opt})
+      return res
+    } catch (error) {
+      console.error(error)
+    }
+    
   }
 }
 
