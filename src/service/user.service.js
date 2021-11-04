@@ -1,3 +1,4 @@
+const { context } = require("../app");
 const User = require("../model/user.model");
 
 class UserService {
@@ -33,6 +34,23 @@ class UserService {
     try {
       const res = await User.update(newOpt,{where:opt})
       return res
+    } catch (error) {
+      console.error(error)
+    }
+    
+  }
+
+  async deleteById(obj){
+    console.log(obj);
+    const {id} = obj
+    const whereOpt = { id }
+    try {
+      const res = await User.destroy({where:whereOpt})
+      if(res==1){
+        return res
+      }else{
+        console.error('删除失败')
+      }
     } catch (error) {
       console.error(error)
     }

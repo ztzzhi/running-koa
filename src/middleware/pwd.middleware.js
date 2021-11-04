@@ -39,6 +39,7 @@ const jwtTokenCheck = async (ctx, next) => {
 };
 
 const bcryptPassword = async (ctx, next) => {
+  console.log(ctx.request.body);
   const { password } = ctx.request.body;
 
   const salt = bcrypt.genSaltSync(SALT);

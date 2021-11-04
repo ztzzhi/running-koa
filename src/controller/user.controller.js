@@ -1,4 +1,4 @@
-const { createUser, getUserInfo ,updateById} = require("../service/user.service");
+const { createUser, getUserInfo ,updateById ,deleteById} = require("../service/user.service");
 
 const jwt = require('jsonwebtoken');
 
@@ -89,6 +89,33 @@ class UserController {
       ctx.app.emit('error',{
         code:500,
         msg:'密码信息修改失败',
+        result:''
+      },ctx)
+    }
+  }
+
+  //用户删除
+  async deleteUser(ctx,next){
+    try {
+      const res = await deleteById(ctx.request.query)
+      if(res==1){
+        ctx.body = {
+          code:200,
+          msg:'删除成功',
+          result:''
+        }
+      }else{
+        ctx.app.emit('error',{
+          code:500,
+          msg:'删除失败',
+          result:''
+        },ctx)
+      }
+    } catch (error) {
+      console.error(error)
+      ctx.app.emit('error',{
+        code:500,
+        msg:'删除失败',
         result:''
       },ctx)
     }

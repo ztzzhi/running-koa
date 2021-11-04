@@ -8,11 +8,13 @@ const router = require('../router')
 
 const app = new Koa()
 
-app.use(router.routes())
-
+// KoaBody的位置一定要在 router.routes()的前面
 app.use(KoaBody({
     multipart:true
 }))
+
+app.use(router.routes())
+
 
 
 app.on('error',errorHandle)
